@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Data Scrape</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container" style="background-image: url('https://imgix.bustle.com/uploads/shutterstock/2019/7/19/3931f878-cd90-4172-b573-8399fdc6b5ba-shutterstock-1041249343.jpg?w=970&h=546&fit=crop&crop=faces&auto=format&q=70');">
+    <div id="scraper" class="jumbotron text-center">
+        <h1 id="scrape_title">Scrape Mars Data</h1>
+        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data Now</a></p>
+        <style>
+          #scraper{background-color:transparent}
+          #scrape_title{color: white}
+        </style>
+      </div>
+    <div class="container">
+        <h1>Mars News</h1>
+        <h2>{{mars.Title}}</h2>
+        <p>{{mars.Paragraph}}</p>
+        <style>
+          h2{color: white}
+          p{color: white}
+          h1{color: white}
+        </style>
+    </div>
+    <div class = "container">
+        <div class = "row">
+            <div id="mars_pic_box" class="col-lg-8 col-md-8 col-sm-12">
+                <h2 id="pic" style = "font-size: 30px">Mars Image</h2>
+                <br>
+                <img id="mars_pic" src="{{mars.MarsP | default('static/images/error.png', true)}}" class = "img-responsive" style="max-width:100%; max-height: auto;" alt="Mars Featured Image"/>
+                <style>
+                  #pic{}
+                </style>
+            </div>
+            <style>
+              #mars_pic_box{background-color: white;}
+            </style>
+            <div class = "col-lg-4 col-md-4, col-sm-12">
+                <br>
+                <h3>Mars Fact Table</h3>
+                <div id="table_mars" style="max-width: 300px; max-height: 305px; font-size: 15px; margin-bottom: 65px;">
+                    {{mars.MarsDT | safe}}
+                    <style>
+                      #table_mars{background-color: white;}
+                    </style>
+                </div>
+                <style>
+                  h3{color: white}
+                </style>
+            </div>
+        </div>
+    </div>
+  </div>
+  <br>
+  <h3 style="padding-top: 75px; margin-top: 100px; text-align: center;">Mars Hemispheres</h3>
+  <div class="card-deck">
+    <hr>
+    <div class="col-md-8">
+      <div class="row"></div>
+        {% for x in mars.HemiI %}
+        <div class = col-md-6>
+          <div class = "thumbnail">
+              <img src="{{x.image}}" alt="">
+              <div class = "card-body">
+                <h5 class = "card-text">{{x.title}}</h5>
+              </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
